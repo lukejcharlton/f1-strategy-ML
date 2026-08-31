@@ -2,15 +2,19 @@
 Race strategy simulation using Barcelona ’26 data, including a user inputted strategy tester and a custom Gymnasium environment for training a PPO agent with Stable‑Baselines3.
 
 ## Project Overview
-I began the project to deepen my understanding and application of Python libraries and machine learning. I chose an F1 based project as I have been a long time fan so also have a deep understanding of the sport. Barcelona 2026 was chosen as it's seen as a classic "all-rounder" track and after watching the race I wanted to compare Lewis' 3 stop strategy to George's 2 stop strategy particularly in the scenario where the late vsc doesn't occur.
+This project models Formula 1 race strategy using Barcelona ’26 data. The initial motivation was to analyse Lewis's 3 stop against George's 2 stop, particularly in scenarios where the late Virtual Safety Car doesn't occur. Barcelona was selected because it is considered a balanced “all‑rounder” circuit and is widely used as a test track, making it ideal for modelling tyre wear, stint length, lap‑time evolution, and safety‑car dynamics.
 
-The project includes 2 sub-projects: a deterministic strategy simulator allowing for user inputted strategies and a reinforcement-learning agent trained in a gymnasium environment.
+The project also served as a way to deepen my practical experience with NumPy, pandas, and machine learning techniques in Python. Data was collected using the FastF1 API, cleaned with pandas, and used to train a random forest regression model with Scikit‑Learn to predict lap times. NumPy was used throughout and visualisations were created using Matplotlib.
 
-Data was collected from the FastF1 API, cleaned and filtered using Pandas which was used to create a random forest regression model with Scikit-Learn. The gymnasium environment was created using the gymnasium library and the agent was trained using PPO from Stable-Baselines 3. NumPy was used throughout and visualisations were created using Matplotlib.
+The repository is organised into two sub‑projects:
+
+- Deterministic Strategy Simulator — allows user‑defined strategies to be evaluated using tyre‑wear modelling, lap‑time regression, and safety‑car probability.
+
+- Reinforcement‑Learning Agent — a custom Gymnasium environment where a PPO agent (Stable‑Baselines3) learns optimal pit‑stop and tyre‑compound strategies under stochastic race conditions.
 
 
 
-## Achknowledgements
+## Acknowledgements 
 This project uses Stable-Baselines3 (Raffin et al., 2021) for PPO training.
 https://github.com/DLR-RM/stable-baselines3
 
