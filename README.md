@@ -55,14 +55,14 @@ f1-strategy-ML/
 ```
 
 ## Determinisitc Strategy Simulator
-This notebook takes user inputted strategies which are then used to simulate races using a Monte Carlo model. The model predicts lap times using a random forest regression which was created with data from the FastF1 API from Barcelona '26 which is combined with a tyre cliff function. Race flag transitions are controlled by a markov chain to give random flags for each race simulated. 
+This notebook takes user inputted strategies which are then used to simulate races using a Monte Carlo model. The model predicts lap times using a random forest regression which was created with data from the FastF1 API from Barcelona '26 which is combined with a tyre cliff function as the data didn't include tyre cliffs therefore the regression model does not account for tyre cliffs. Race flag transitions are controlled by a markov chain to give random flags for each race simulated. 
 
 To use the notebook begin by running each cell. Key parameters are set in the cell after the random forest regression. Key parameters include the number of laps for each race, the number of simulations ie races simulated and finally the strategies that are tested. By default there are 5 strategies pre entered, the first 3 were self created, strategy 4 is Hamilton's strategy from the race with the final pit lap being moved back a lap (assuming the VSC didn't occur) and the 5th strategy is George's 2 stop. To enter your own strategy either edit a pre existing strategy or create a new nested list with same structure as the others. Ensure the first nest list begins with -1 to define the starting tyre with the option of "SOFT" "MEDIUM" "HARD".
 
 Continue to run the following cells. The second to last cell runs the Monte Carlo simulation. Depending on the number of simulations chosen and the hardware of the device this can take upwards oof 10 minutes, however once the simualtions have been completed "Finished" will be printed. The final cell will then output the average race time of each strategy. When simulating multiple strategies over N simulations the program will pre generate N "races" of flags so each strategy will experience the same flags to ensure fair comparison.
 
 ## Reinforcement Learning Model
-This part of the project includes a reinforcement learning agent that learns optimal strategy decisions. A custom gymnasium environment models the race including flag states, tyre wear and lap times. The agent is trained using proximal policy optimization (PPO) from Stable-Baselines3. The trained model can then be ran on race simulations outputting the decisions the model made and the laptimes.
+This part of the project includes a reinforcement learning agent that learns optimal strategy decisions. A custom gymnasium environment models the race including flag states, tyre wear and lap times from the deterministic strategy. The agent is trained using proximal policy optimization (PPO) from Stable-Baselines3. The trained model can then be ran on race simulations outputting the decisions the model made and the laptimes.
 
 ### Training
 Although the repository includes a pre‑trained agent (RL_model_final.zip), users can train new agents using the provided notebooks. Training can be performed using either a single environment (RL_training.ipynb) or parallel environments (RL_parallel_processing_training.ipynb), with the parallel version offering significantly faster training.
@@ -136,6 +136,25 @@ The notebook then runs that number of races using the loaded agent and outputs:
 
 - each race’s total time
 - the average race time across all simulations
+
+## Results
+Deterministic strategy - The main goal of the project was to determine whether the 2 stop or 3 stop was faster. Using the deterministic model I found the 3 stop's race time was 13.26 seconds faster than the 2 stop over 1000 simulations. Obviously there is some nuance to this result as the model doesn't account for time lost to traffic, dirty air and having to overtake other drives which would obviously likely hinder the 3 stop more than the 2 stop. The laptime model also doesn't account for driver, team or driver behaviour (for example saving tyres). However, I think the time difference shown by the model clearly implies the 3 stop was the faster strategy. Furthermore, after running 100 simulations with set flags that didn't include the late VSC that gave Hamilton the free pitstop in the actual race and once again the results implied the 3 stop was quicker. 
+
+## Future Work
+While the project did achieve what I wanted it to there are multiple improvements that could be made including:
+- Adding wet weather simulation
+- Improving the RL agent
+- Introducing other cars to race against
+- Improve laptime predictions to account for dirty air, slipstream and battling
+
+## Libraries used
+NumPy
+Pandas
+Scikit-Learn
+Gymnasium
+Stable-Baselines3
+FastF1
+Matplotlib
 
 ## Acknowledgements 
 This project uses Stable-Baselines3 (Raffin et al., 2021) for PPO training.
