@@ -65,19 +65,77 @@ Continue to run the following cells. The second to last cell runs the Monte Carl
 This part of the project includes a reinforcement learning agent that learns optimal strategy decisions. A custom gymnasium environment models the race including flag states, tyre wear and lap times. The agent is trained using proximal policy optimization (PPO) from Stable-Baselines3. The trained model can then be ran on race simulations outputting the decisions the model made and the laptimes.
 
 ### Training
-While the project does already have a trained agent under "RL_model_final.zip" it is also possible to train agents using the environment. An agent can either be trained under 1 environment using the "RL_training.ipynb" or using parallel environments using race_env.py to create the environment and "RL_parallel_processing_training.ipynb" to execute the parallel environment training which I found to be 4x faster, also dependent on training steps and hardware. Training using 500,000 training steps on my laptop in the single environment took upwards of 3 hours which reduced to 40 minutes with the implementation of parallel environments.
+Although the repository includes a pre‑trained agent (RL_model_final.zip), users can train new agents using the provided notebooks. Training can be performed using either a single environment (RL_training.ipynb) or parallel environments (RL_parallel_processing_training.ipynb), with the parallel version offering significantly faster training.
 
-Single Environment Training - Begin by opening "RL_training.ipynb" and begin by running all the cells before the final cell. The final cell is responsible for the training. Before starting training ensure to set a name for the model to save under at the end of the cell to allow it to be loaded for simulations. The training parameters can also be found in the same cell. The main parameters to adjust are the ent_coef which impacts how much the model will explore in training (a higher coefficient leads to more exploration) and also training_steps with more training steps commonly leading to better performance from the agent, however training will take longer with more training steps. The gymnasium environment can also be found before the training and adjusting parameters such as the observations and the reward structure can also impact training. While training the model, training statistics will be printed. The main statistics to keep an eye on are the training_steps, ep_rew_mean (x10 will give the models current average race time), entropy_loss (how much the model is still exploring) and explained variance which should reach between 0.999 and 0.995 for a correctly trained model. If explained variance doesn't converge there is likely a mistake in the gymnasium environment. In my experience I found a well trained model had an explained variance >0.995, an entropy loss of < -0.23 and a rew_mean between 56.5 and 57.
+On my laptop, training for 500,000 steps took upwards of 3 hours using a single environment, compared to 40 minutes using parallel environments. Performance depends on hardware and training configuration.
 
-Parallel Environment Training - The model can also be trained using parallel environments which can significantly decrease training time. Parallel training is similar to single environment training however the gymnasium environment is stored within race_env.py. To begin the training open the "RL_parallel_processing_training.ipynb". The parameter setup is identical to the single environment version in terms of setting training steps, training parameters and the name the trained agent is saved under. With the addition of parallel environments the number of parallel environments also needs to be set under n_envs towards the top of the cell. I used 10 environments as my laptop has 16 CPU cores. Once again while the agent is training the training statistics are printed. For both versions of training checkpoints are also created every 50,000 training steps in case of program or hardware crashes. 
+#### Single Environment Training Open RL_training.ipynb.
+
+1. Open "RL_training.ipynb"
+
+2. Run all setup cells before the final training cell.
+
+3. In the final cell:
+- Set a model name for saving the trained agent.
+- Adjust training parameters if desired.
+
+4. Key parameters:
+- ent_coef — controls exploration (higher values increase exploration).
+- training_steps — more steps generally improve performance but increase training time.
+
+5. The Gymnasium environment is defined earlier in the notebook; modifying observations or reward structure will affect training behaviour.
+
+6. During training, several statistics are printed:
+- training_steps
+- ep_rew_mean (×10 ≈ average race time)
+- entropy_loss (lower values indicate reduced exploration)
+- explained_variance (should converge to 0.995–0.999 for a correctly functioning model)
+
+A well‑trained model typically shows:
+explained variance > 0.995
+entropy loss < –0.23
+ep_rew_mean between 56.5 and 57
+
+If explained variance does not converge, there is likely an issue in the environment logic.
+
+#### Parallel Environment Training 
+Parallel training uses vectorised environments to significantly reduce training time. The environment is defined in "race_env.py", and training is executed in "RL_parallel_processing_training.ipynb".
+
+The setup mirrors the single‑environment version, with one additional parameter:
+
+n_envs — number of parallel environments (I used 10 on a 16‑core CPU).
+
+Training statistics are printed in the same format as the single‑environment version.
+Checkpoints are automatically saved every 50,000 steps to protect against crashes.
 
 ### Evaluation and Implementation of Trained Agents
-Once the agent is trained and saved open the "RL_simulation_and_visualisation.ipynb" notebook. This notebook allows the user to choose which agent they would like to simulate. 2 simulation options are then available:
-- Simulate 1 race allowing the loaded agent to decide the strategy which can then be visualised
-- Simulate N races and output each races time and average race time
+Evaluation is performed using RL_simulation_and_visualisation.ipynb. This notebook allows users to load any trained agent and run race simulations. Two evaluation modes are available:
 
-After opening the notebook begin by running the first cell to import the required libraries and the gymnasium environment. In the cell below enter the name of the agent you would like to simulate, these can be found in the RL_strategy folder and can either be the pre-trained model or a model you have trained and saved yourself. The next cell simulates 1 race, where the flags are simulated each lap and the trained agent makes a decision each lap from Staying out or pitting for either soft, medium or hard tyres. This cell will also output a csv called strategy_output (the name can be changed for comparing multiple races or agents). The csv record the decision the agent makes each lap, the flag each lap, and the laptime each lap and total laptimes. The cell below the creates a graph showing the laptime each lap and pitstop laps are marked with a dashed line.
-The cell below allows the user to choose how many simulations they would like to run under n_simulations. These simulations are then run with the loaded agent making the strategy decisions in each simualtion. The total race time of each simulation and the average race time is the outputted.
+- Single race simulation — runs one full race and visualises the agent’s strategy.
+
+- Multiple race simulation — runs N races and outputs each race time and the average race time.
+
+#### Single Race Simulation
+1. Run the first cell to import libraries and load the environment.
+2. Enter the name of the agent to simulate (found in the reinforcement_learning folder).
+
+3. The next cell simulates one full race:
+- Flag states are generated each lap.
+- The agent chooses between staying out or pitting for soft, medium, or hard tyres.
+- A CSV file (strategy_output.csv, name can be changed) is generated containing:
+    - the agent’s decision each lap
+    - the flag state
+    - the lap time
+    - total race time
+
+A plot is generated showing lap times, with pit stops marked using dashed lines.
+
+#### Multiple Race Simulations
+The final cell allows the user to set n_simulations.
+The notebook then runs that number of races using the loaded agent and outputs:
+
+- each race’s total time
+- the average race time across all simulations
 
 ## Acknowledgements 
 This project uses Stable-Baselines3 (Raffin et al., 2021) for PPO training.
