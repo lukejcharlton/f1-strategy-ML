@@ -19,7 +19,6 @@ f1-strategy-ML/
 ├── deterministic_strategy/
 │   - deterministic_race_strategy.ipynb
 │     The notebook simulates user inputted strategies
-|      
 │
 ├── reinforcement_learning/
 │   Contains the reinforcement‑learning implementation:
@@ -52,7 +51,8 @@ f1-strategy-ML/
 │   MIT license for open‑source use.
 │
 └── .gitignore
-    Specifies files and folders Git should ignore.
+    Specifies files and folders Git should ignore
+
 
 
 
