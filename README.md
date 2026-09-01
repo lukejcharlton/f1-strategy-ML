@@ -12,6 +12,48 @@ The repository is organised into two sub‑projects:
 
 - Reinforcement‑Learning Agent — a custom Gymnasium environment where a PPO agent (Stable‑Baselines3) learns optimal pit‑stop and tyre‑compound strategies under stochastic race conditions.
 
+## Repository Structure 
+
+f1-strategy-ML/
+│
+├── deterministic_strategy/
+│   - deterministic_race_strategy.ipynb
+│     The notebook simulates user inputted strategies
+|      
+│
+├── reinforcement_learning/
+│   Contains the reinforcement‑learning implementation:
+│   - race_env.py
+│     Creates the gym environment and is used for parallel training
+│   - RL_training.ipynb
+│     Notebook for training the PPO agent using Stable‑Baselines3.
+│   - RL_parallel_processing_training.ipynb
+│     Optional notebook for faster PPO training using parallel training.
+│   - RL_simulation_and_visualisation.ipynb
+│     Notebook for evaluating the trained agent and visualising race outcomes.
+│   - RL_model_final.zip
+│     A trained PPO model using the hyperparameters in race_env.py and the notebook itself
+│   - strategy_output.csv
+│     The strategy output when running RL_simulation_and_visualisation.ipynb
+│
+├── checkpoints/
+│   Stores additional PPO model checkpoints and logs.
+│
+├── __pycache__/
+│   Auto‑generated Python cache files.
+│
+├── requirements.txt
+│   Python dependencies required to run the project.
+│
+├── README.md
+│   Project documentation and overview.
+│
+├── LICENSE
+│   MIT license for open‑source use.
+│
+└── .gitignore
+    Specifies files and folders Git should ignore.
+
 
 
 ## Acknowledgements 
