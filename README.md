@@ -13,7 +13,7 @@ The repository is organised into two sub‑projects:
 - Reinforcement‑Learning Agent — a custom Gymnasium environment where a PPO agent (Stable‑Baselines3) learns optimal pit‑stop and tyre‑compound strategies under stochastic race conditions.
 
 ## Repository Structure 
-
+```
 f1-strategy-ML/
 │
 ├── deterministic_strategy/
@@ -52,7 +52,7 @@ f1-strategy-ML/
 │
 └── .gitignore
     Specifies files and folders Git should ignore
-
+```
 
 
 
