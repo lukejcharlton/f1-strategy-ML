@@ -1,0 +1,7 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+gymnasium
+stable-baselines3
+fastf1
