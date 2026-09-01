@@ -148,13 +148,13 @@ While the project did achieve what I wanted it to there are multiple improvement
 - Improve laptime predictions to account for dirty air, slipstream and battling
 
 ## Libraries used
--NumPy
--Pandas
--Scikit-Learn
--Gymnasium
--Stable-Baselines3
--FastF1
--Matplotlib
+- NumPy
+- Pandas
+- Scikit-Learn
+- Gymnasium
+- Stable-Baselines3
+- FastF1
+- Matplotlib
 
 ## Acknowledgements 
 This project uses Stable-Baselines3 (Raffin et al., 2021) for PPO training.
