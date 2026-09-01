@@ -23,15 +23,15 @@ f1-strategy-ML/
 ├── reinforcement_learning/
 │   Contains the reinforcement‑learning implementation:
 │   - race_env.py
-│     Creates the gym environment and is used for parallel training
+│     Creates the gym environment and is used for parallel environment training
 │   - RL_training.ipynb
 │     Notebook for training the PPO agent using Stable‑Baselines3.
 │   - RL_parallel_processing_training.ipynb
-│     Optional notebook for faster PPO training using parallel training.
+│     Optional notebook for faster PPO training using parallel environment training.
 │   - RL_simulation_and_visualisation.ipynb
 │     Notebook for evaluating the trained agent and visualising race outcomes.
 │   - RL_model_final.zip
-│     A trained PPO model using the hyperparameters in race_env.py and the notebook itself
+│     A trained PPO model using the hyperparameters in race_env.py and the RL_parallel_processing_training.ipynb
 │   - strategy_output.csv
 │     The strategy output when running RL_simulation_and_visualisation.ipynb
 │
